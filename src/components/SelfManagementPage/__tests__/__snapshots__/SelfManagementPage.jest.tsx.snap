@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should render all information correctly 1`] = `
+<div>
+  <section
+    data-fs-self-management-section="true"
+  >
+    <h1
+      data-fs-self-management-title="true"
+    >
+      MockTitle
+    </h1>
+    <code
+      data-fs-self-management-code="true"
+    >
+      MockContent
+    </code>
+    <button />
+  </section>
+</div>
+`;
