@@ -1,8 +1,13 @@
 import React from 'react'
-import { SelfManagementPage } from '../SelfManagementPage'
+import { SelfManagementPage } from '../'
 import { render } from '@testing-library/react'
 
 const mockOnClick = jest.fn()
+
+jest.mock('@faststore/ui', () => ({
+    Button: () => <button />
+}))
+
 
 it('Should render all information correctly', () => {
     const pageMockProps = {
@@ -12,7 +17,7 @@ it('Should render all information correctly', () => {
         onClick: mockOnClick
     }
 
-    const component = render(<SelfManagementPage {...pageMockProps} />)
+    const { container } = render(<SelfManagementPage {...pageMockProps} />)
 
-    // expect(component.toJSON()).toMatchSnapshot()
+    expect(container).toMatchSnapshot()
 })
