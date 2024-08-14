@@ -2,8 +2,10 @@ import { LinkButton, Icon } from '@faststore/ui';
 import { useState } from "react";
 import { SelfManagementDrawer } from '../SelfManagementDrawer/SelfManagementDrawer';
 
-export const SelfManagementSignInButton = ({ session, storeConfig }: { session: any, storeConfig: any }) => {
+export const SelfManagementSignInButton = ({ useSession, storeConfig }: { useSession: any, storeConfig: any }) => {
   const [isOpen, setIsOpen] = useState(false)
+
+  const { ...session } = useSession()
 
   const openDrawer = (event: any) => {
     if (!session.person) {

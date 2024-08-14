@@ -1,6 +1,5 @@
 import { SlideOver, useFadeEffect } from '@faststore/ui';
 
-import styles from './SelfManagementDrawer.module.scss'
 import { SelfManagementDrawerHeader } from './SelfManagementDrawerHeader';
 import { SelfManagementDrawerFooter } from './SelfManagementDrawerFooter';
 import { SelfManagementDrawerBody } from './SelfManagementDrawerBody';
@@ -25,9 +24,6 @@ export const SelfManagementDrawer = ({ isOpen, closeDrawer }: SelfManagementDraw
       isOpen={isOpen}
       size='partial'
       direction='rightSide'
-      overlayProps={{
-        className: `section ${styles.section}`,
-      }}
     >
       <SelfManagementDrawerHeader onCloseDrawer={closeDrawer} orgName='stellar inc.' orgUrl='/self-management' />
       <SelfManagementDrawerBody />
