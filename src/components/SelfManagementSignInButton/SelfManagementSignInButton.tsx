@@ -8,7 +8,7 @@ export const SelfManagementSignInButton = ({ useSession, storeConfig }: { useSes
   const { ...session } = useSession()
 
   const openDrawer = (event: any) => {
-    if (!session.person) {
+    if (session.person) {
       event.preventDefault()
 
       setIsOpen(true)
