@@ -7,15 +7,15 @@ export type SelfManagementDrawerHeaderProps = {
   onCloseDrawer?: () => void;
   onSwitchButtonClick?: () => void;
   onConfigButtonClick?: () => void;
-  orgImage?: ReactNode;
-  orgName: string;
-  orgUrl: string;
+  org: {
+    image?: ReactNode;
+    name: string;
+    url: string;
+  }
 };
 
 export const SelfManagementDrawerHeader = ({
-  orgUrl,
-  orgName,
-  orgImage,
+  org,
   onCloseDrawer,
   onSwitchButtonClick,
   onConfigButtonClick,
@@ -26,12 +26,12 @@ export const SelfManagementDrawerHeader = ({
         <div></div>
       </SlideOverHeader>
       <div data-fs-self-management-drawer-header>
-        <Link data-fs-self-management-drawer-header-org-link href={orgUrl}>
+        <Link data-fs-self-management-drawer-header-org-link href={org.url}>
           <div data-fs-self-management-drawer-header-org-image>
-            {orgImage ?? <Icon name="Bell" width={24} height={24} />}
+            {org?.image ?? <Icon name="Bell" width={24} height={24} />}
           </div>
           <h1 data-fs-self-management-drawer-header-org-name>
-            {orgName}
+            {org?.name}
           </h1>
         </Link>
 

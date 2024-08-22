@@ -1,24 +1,35 @@
-import { LinkButton, Icon } from '@faststore/ui';
+import { LinkButton, Icon } from "@faststore/ui";
 import { useState } from "react";
-import { SelfManagementDrawer } from '../SelfManagementDrawer/SelfManagementDrawer';
+import { SelfManagementDrawer } from "../SelfManagementDrawer/SelfManagementDrawer";
 
-export const SelfManagementSignInButton = ({ useSession, storeConfig }: { useSession: any, storeConfig: any }) => {
-  const [isOpen, setIsOpen] = useState(false)
+export type SelfManagementSignInButtonProps = {
+  useSession: any;
+  useBuyerOrg: any;
+  storeConfig: any;
+};
 
-  const { ...session } = useSession()
+export const SelfManagementSignInButton = ({
+  useSession,
+  storeConfig,
+  useBuyerOrg,
+}: SelfManagementSignInButtonProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const { ...session } = useSession();
+
+  const buyerOrg = useBuyerOrg();
 
   const openDrawer = (event: any) => {
-    if (session.person) {
-      event.preventDefault()
+    if (!session.person) {
+      event.preventDefault();
 
-      setIsOpen(true)
+      setIsOpen(true);
     }
-  }
-
+  };
 
   const closeDrawer = () => {
-    setIsOpen(false)
-  }
+    setIsOpen(false);
+  };
 
   return (
     <>
@@ -27,15 +38,28 @@ export const SelfManagementSignInButton = ({ useSession, storeConfig }: { useSes
         href={session.person?.id ? `/account` : `/login`}
         className="text__title-mini"
         variant="tertiary"
-        icon={<Icon name={'User'} width={18} height={18} weight="bold" />}
+        icon={<Icon name={"User"} width={18} height={18} weight="bold" />}
         iconPosition="left"
         onClick={(event) => openDrawer(event)}
       >
-        {session.person?.id ? 'Company' : 'Sign In'}
+        {session.person?.id ? "Company" : "Sign In"}
       </LinkButton>
 
-
-      {isOpen && (<SelfManagementDrawer isOpen={isOpen} closeDrawer={closeDrawer} storeConfig={storeConfig} />)}
+      {isOpen && (
+        <SelfManagementDrawer
+          isOpen={isOpen}
+          closeDrawer={closeDrawer}
+          storeConfig={storeConfig}
+          person={{
+            name: "Donald Green",
+            role: "Admin",
+          }}
+          org={{
+            name: buyerOrg?.name ?? "",
+            url: "/self-management",
+          }}
+        />
+      )}
     </>
-  )
-}
+  );
+};

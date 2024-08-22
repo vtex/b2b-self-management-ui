@@ -1,7 +1,7 @@
 import { SlideOver, useFadeEffect } from '@faststore/ui';
 
-import { SelfManagementDrawerHeader } from './SelfManagementDrawerHeader';
-import { SelfManagementDrawerFooter } from './SelfManagementDrawerFooter';
+import { SelfManagementDrawerHeader, SelfManagementDrawerHeaderProps } from './SelfManagementDrawerHeader';
+import { SelfManagementDrawerFooter, SelfManagementDrawerFooterProps } from './SelfManagementDrawerFooter';
 import { SelfManagementDrawerBody } from './SelfManagementDrawerBody';
 import { doLogout } from '../../utils/logout';
 
@@ -9,9 +9,11 @@ type SelfManagementDrawerProps = {
   isOpen: boolean
   closeDrawer: () => void,
   storeConfig: any
+  person: SelfManagementDrawerFooterProps["person"]
+  org: SelfManagementDrawerHeaderProps["org"]
 }
 
-export const SelfManagementDrawer = ({ isOpen, closeDrawer }: SelfManagementDrawerProps) => {
+export const SelfManagementDrawer = ({ isOpen, closeDrawer, person, org }: SelfManagementDrawerProps) => {
   const { fade, fadeOut } = useFadeEffect()
 
   return (
@@ -25,13 +27,10 @@ export const SelfManagementDrawer = ({ isOpen, closeDrawer }: SelfManagementDraw
       size='partial'
       direction='rightSide'
     >
-      <SelfManagementDrawerHeader onCloseDrawer={closeDrawer} orgName='stellar inc.' orgUrl='/self-management' />
+      <SelfManagementDrawerHeader onCloseDrawer={closeDrawer} org={org} />
       <SelfManagementDrawerBody />
       <SelfManagementDrawerFooter
-        person={{
-          name: "Donald Green",
-          role: "Admin"
-        }}
+        person={person}
         onLogoutClick={doLogout}
       />
     </SlideOver>
