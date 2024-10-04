@@ -14,7 +14,7 @@ export const SelfManagementPage = ({
   onClick,
 }: SelfManagementPageProps) => (
   <section data-fs-self-management-section>
-    <h2 data-fs-self-management-title>{title}</h2>
+    <h1 data-fs-self-management-title>{title}</h1>
     <code data-fs-self-management-code>{content}</code>
     <Button variant="primary" onClick={onClick}>
       {buttonLabel}
