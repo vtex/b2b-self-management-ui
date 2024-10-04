@@ -1,6 +1,3 @@
 {
-    "installCommand": "npm install",
-    "buildCommand": "npm run build",
-    "sandboxes": ["vanilla"],
-    "node": "18"
+    "sandboxes": ["vanilla"]
   }
