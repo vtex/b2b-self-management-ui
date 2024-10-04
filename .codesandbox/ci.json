@@ -1,0 +1,24 @@
+{
+    "previews": [
+      {
+        "title": "PR Preview",
+        "description": "Preview generated for PR #${PR_NUMBER}",
+        "url": "https://codesandbox.io/s/github/${GITHUB_REPOSITORY}?pr=${PR_NUMBER}",
+        "actions": [
+          {
+            "action": "install",
+            "command": "npm ci"
+          },
+          {
+            "action": "build",
+            "command": "npm run build"
+          },
+          {
+            "action": "start",
+            "command": "npm start"
+          }
+        ]
+      }
+    ]
+  }
+  
