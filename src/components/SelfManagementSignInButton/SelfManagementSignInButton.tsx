@@ -31,7 +31,7 @@ export const SelfManagementSignInButton = ({ useSession, storeConfig }: { useSes
         iconPosition="left"
         onClick={(event) => openDrawer(event)}
       >
-        {session.person?.id ? 'Company' : 'Sign In'}
+        lalala
       </LinkButton>
 
 
