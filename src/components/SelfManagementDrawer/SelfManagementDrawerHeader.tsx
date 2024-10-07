@@ -1,7 +1,8 @@
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import {
   Button, IconButton, SlideOverHeader, Link, Icon
 } from "@faststore/ui";
+import { CustomerSwitchDrawer } from "../CustomerSwitch/CustomerSwitchDrawer";
 
 export type SelfManagementDrawerHeaderProps = {
   onCloseDrawer?: () => void;
@@ -20,11 +21,11 @@ export const SelfManagementDrawerHeader = ({
   onSwitchButtonClick,
   onConfigButtonClick,
 }: SelfManagementDrawerHeaderProps) => {
+  const [ openCustomerDrawer, setOpenCustomerDrawer ] = useState(false)
+
   return (
     <>
-      <SlideOverHeader onClose={() => onCloseDrawer?.()}>
-        <div></div>
-      </SlideOverHeader>
+      <SlideOverHeader onClose={() => onCloseDrawer?.()} children={null}/>
       <div data-fs-self-management-drawer-header>
         <Link data-fs-self-management-drawer-header-org-link href={orgUrl}>
           <div data-fs-self-management-drawer-header-org-image>
@@ -57,6 +58,8 @@ export const SelfManagementDrawerHeader = ({
           />
         </div>
       </div>
+
+      { openCustomerDrawer && <CustomerSwitchDrawer isOpen={openCustomerDrawer} onCloseDrawer={() => setOpenCustomerDrawer(false)} />}
     </>
   );
 };
