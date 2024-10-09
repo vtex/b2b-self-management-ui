@@ -22,9 +22,7 @@ export const SelfManagementDrawerHeader = ({
 }: SelfManagementDrawerHeaderProps) => {
   return (
     <>
-      <SlideOverHeader onClose={() => onCloseDrawer?.()}>
-        <div></div>
-      </SlideOverHeader>
+      <SlideOverHeader onClose={() => onCloseDrawer?.()} children={null}/>
       <div data-fs-self-management-drawer-header>
         <Link data-fs-self-management-drawer-header-org-link href={orgUrl}>
           <div data-fs-self-management-drawer-header-org-image>
