@@ -1,6 +1,6 @@
 {
   "name": "@vtex/b2b-self-management-ui",
-  "version": "0.0.12",
+  "version": "0.0.14",
   "private": false,
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
