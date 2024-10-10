@@ -1,0 +1,31 @@
+# This Action should run on each PR by verifying if they pass on lint, test and build
+name: CI
+
+on:
+  push:
+    branches-ignore:
+      - main
+
+jobs:
+  build:
+    name: FastStore
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Build
+        run: yarn build
