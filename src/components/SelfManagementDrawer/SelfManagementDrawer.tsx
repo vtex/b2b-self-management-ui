@@ -29,7 +29,7 @@ export const SelfManagementDrawer = ({ isOpen, closeDrawer }: SelfManagementDraw
         size='partial'
         direction='rightSide'
       >
-        <SelfManagementDrawerHeader onCloseDrawer={closeDrawer} onSwitchButtonClick={() => setOpenCustomerDrawer(true)} orgName='stellar inc.' orgUrl='/self-management' />
+        <SelfManagementDrawerHeader onCloseDrawer={closeDrawer} onSwitchButtonClick={() => setOpenCustomerDrawer(true)} orgName='Stellar Inc.' orgUrl='/self-management' />
         <SelfManagementDrawerBody />
         <SelfManagementDrawerFooter
           person={{
