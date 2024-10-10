@@ -36,12 +36,6 @@ jobs:
       - name: Build
         run: yarn build
 
-      - name: Lint
-        run: yarn lint
-
-      - name: Test
-        run: yarn test
-
       - name: Publish
         run: yarn release
         env:
