@@ -2,11 +2,10 @@ name: Release Version
 
 on:
   pull_request:
-    types: [closed]
+    types: [opened, synchronize]
 
 jobs:
-  check-merge:
-    if: github.event.pull_request.merged == true
+  request-version:
     runs-on: ubuntu-latest
 
     steps:
@@ -29,9 +28,8 @@ jobs:
             })
 
   check-version:
-    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
-    needs: check-merge
+    needs: request-version
     steps:
       - name: Check version bump reaction
         uses: actions/github-script@v6
@@ -56,7 +54,6 @@ jobs:
             core.setOutput('version_type', versionType);
 
   release:
-    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     needs: check-version
     steps:
@@ -66,7 +63,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '18'
           registry-url: 'https://registry.npmjs.org/'
 
       - name: Install dependencies
