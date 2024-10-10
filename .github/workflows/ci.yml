@@ -2,10 +2,11 @@ name: Release Version
 
 on:
   pull_request:
-    types: [opened, synchronize]
+    types: [closed]
 
 jobs:
-  request-version:
+  check-merge:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
 
     steps:
@@ -28,8 +29,9 @@ jobs:
             })
 
   check-version:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
-    needs: request-version
+    needs: check-merge
     steps:
       - name: Check version bump reaction
         uses: actions/github-script@v6
@@ -53,34 +55,35 @@ jobs:
             console.log(`Version to bump: ${versionType}`);
             core.setOutput('version_type', versionType);
 
-#   release:
-#     runs-on: ubuntu-latest
-#     needs: check-version
-#     steps:
-#       - name: Checkout code
-#         uses: actions/checkout@v3
+  release:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    needs: check-version
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-#       - name: Setup Node.js
-#         uses: actions/setup-node@v3
-#         with:
-#           node-version: '16'
-#           registry-url: 'https://registry.npmjs.org/'
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          registry-url: 'https://registry.npmjs.org/'
 
-#       - name: Install dependencies
-#         run: yarn install
+      - name: Install dependencies
+        run: yarn install
 
-#       - name: Bump version
-#         run: |
-#           yarn version --${{ needs.check-version.outputs.version_type }}
+      - name: Bump version
+        run: |
+          yarn version --${{ needs.check-version.outputs.version_type }}
 
-#       - name: Build project
-#         run: yarn build
+      - name: Build project
+        run: yarn build
 
-#       - name: Publish to NPM
-#         run: |
-#           echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
-#           yarn publish --non-interactive
+      - name: Publish to NPM
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+          yarn publish --non-interactive
 
-#       - name: Push changes and tags
-#         run: |
-#           git push --follow-tags
+      - name: Push changes and tags
+        run: |
+          git push --follow-tags
