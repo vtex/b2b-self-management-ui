@@ -36,7 +36,16 @@ jobs:
       - name: Build
         run: yarn build
 
+      - name: Update version to patch
+        run: yarn version --patch
+
       - name: Publish
         run: yarn publish --non-interactive
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Push changes and tags
+        run: |
+          git config user.email "vtexgithubbot@github.com"
+          git config user.name "vtexgithubbot"
+          git push --follow-tags
